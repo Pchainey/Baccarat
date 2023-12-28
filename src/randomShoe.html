@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Baccarat Dream</title>
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+      <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'"> -->
+    <link rel="stylesheet" href="./bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="gamepage.css" />
+    <link rel="stylesheet" href="simulation.css" />
+    <link rel="stylesheet" href="randomShoe.css" />
+</head>
+
+<body>
+
+    <nav class="navbar navbar-dark bg-dark fixed-top" style="height: 60px ;">
+        <a class="navbar-brand" href="#" style="font-size: 20px ;"> &emsp; Baccarat Dream</a>
+    </nav>
+
+
+    <br><br>
+
+
+
+    <div class="randomShoeDiv">
+
+        <div id="mainBackToHome">
+            <a class="btn btn-success" id="start-simulation" href="../index.html" role="button">Back To Home</a>
+        </div>
+
+        <br>
+
+        <div id="DisplayShoeNumber">
+            <div class="row">
+                <div class="col-3">
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput" class="form-label">Random Shoe No</label>
+                        <input type="number" class="form-control" id="RSNo" value="0" onchange="validityCheck4RSNO()">
+                    </div>
+                </div>
+                <div class="col-3">
+                    <button type="button" class="btn btn-dark" onclick="playAgainInRS()" id="playAgainBtn"
+                        style="margin-right: 10px ; margin-top: 25px;">Play Again</button>
+                </div>
+            </div>
+        </div>
+        <div id="back-home" class="row">
+            <div class="col">
+                <button type="button" class="btn btn-primary" onclick="nextSimulationRS()" id="backToSimulation"
+                    style="margin-right: 10px ;">Next Simulation</button>
+                <a class="btn btn-success" id="start-simulation" href="../index.html" role="button"
+                    style="margin-right: 10px ;">Back To Home</a>
+                <button type="button" class="btn btn-dark" onclick="showParameterRS()" id="showParameterBtn"
+                    style="margin-right: 10px ;">Show Parameters</button>
+
+                <span id="showVaribleTableBtn">
+                    <button type="button" class="btn btn-dark" onclick="displayvariableTable()">Show Variable
+                        Table</button>
+                </span>
+            </div>
+        </div>
+
+        <!-- Select Mode Of Random Shoe -->
+        <div id="selectPlayModeOfRandomShoe">
+            <h5>Select Play Mode</h5>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="randomPlayId"
+                    onchange="randomPlayFun()" />
+                <label class="form-check-label" for="inlineRadio1">Random Play</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="selectXlsxFileId"
+                    onchange="selcetXlsxFileFun()" />
+                <label class="form-check-label" for="inlineRadio2">Select Xlsx File</label>
+            </div>
+        </div>
+
+        <!-- File Upload and Start Game Btn -->
+        <div id="displayBtnForRandomShoe"></div>
+
+        <!-- Form For Random Shoe -->
+        <div id="formDisplayInRS" class="form">
+            <h3 id="form-title">Enter Values For Simulation</h3>
+            <div class="row">
+                <div class="col-3">
+                    <!-- Enter Brake Value -->
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput" class="form-label">Brake</label>
+                        <input type="number" class="form-control" id="brakeId" placeholder="Enter No Of Brake"
+                            onchange="changeBrake()" value="0">
+                    </div>
+                </div>
+                <div class="col-3">
+                    <!-- Enter Max Hand   -->
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput" class="form-label">Max Hand</label>
+                        <input type="number" class="form-control" id="maxHandId" onchange="changeMH()" value="100">
+                    </div>
+                </div>
+                <div class="col-3">
+                    <!-- Enter Unit Size -->
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput" class="form-label">Unit Size</label>
+                        <input type="number" class="form-control" id="perUnit" placeholder="Enter Unit Size"
+                            onchange="changeUnit()" value="1">
+                    </div>
+                </div>
+                <div class="col-3" id="singleWinId">
+                    <!-- Enter No Of Single Win -->
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput" class="form-label">Max Single Win</label>
+                        <input type="number" class="form-control" id="esingleP" placeholder="Enter No Of Single Player"
+                            onchange="changeP()" value="4">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- Tie Mode -->
+                <div class="col-3 mt-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                            onchange="chnageTieMode()" />
+                        <label class="form-check-label" for="flexCheckDefault" id="tieLable"> &nbsp; Tie Mode</label>
+                    </div>
+                </div>
+
+                <!-- Select Game Mode -->
+                <div class="col-3">
+                    <label for="formGroupExampleInput" class="form-label">Game Mode</label>
+                    <select class="form-select" id="bettype" aria-label="Disabled select example"
+                        onchange="betchange(this)">
+                        <option value="0" selected>Banker</option>
+                        <option value="1">Player</option>
+                        <option value="2">Differential</option>
+                        <option value="3">Target</option>
+                        <option value="4">Multiple Mode</option>
+                        <option value="5">SOW</option>
+                        <option value="6">ZigZag Player First</option>
+                        <option value="7">ZigZag Banker First</option>
+                        <option value="8">MVD</option>
+                    </select>
+                </div>
+
+                <!-- Play Type -->
+                <div class="col-3">
+                    <label for="formGroupExampleInput" class="form-label">Play Type</label>
+                    <select class="form-select" id="PlayTypeId" aria-label="Disabled select example"
+                        onchange="ChangePlayType(this)">
+                        <option value="0" selected>Normal</option>
+                        <option value="1">2nd Play</option>
+                        <option value="2">3rd Play</option>
+                        <option value="3">4th Play</option>
+                        <option value="1">5th Play</option>
+                    </select>
+                </div>
+
+
+            </div>
+            <br>
+            <div class="row">
+
+                <div class="col-3">
+                    <!-- Enter Stop Profit -->
+                    <div class="mb">
+                        <label for="formGroupExampleInput" class="form-label">Take Profit (Unit)</label>
+                        <input type="number" id="estopProfit" onChange="changeSP()" class="form-control" value="1000">
+                    </div>
+                </div>
+                <div class="col-3">
+                    <!-- Enter Max Bet  -->
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput" class="form-label">Max Bet (Unit)</label>
+                        <input type="number" class="form-control" id="estopLoss" onchange="changeSL()" value="1000">
+                    </div>
+                </div>
+                <div class="col-3">
+                    <!-- Enter Stop Loss -->
+                    <div class="mb">
+                        <label for="formGroupExampleInput" class="form-label">Stop Loss (Unit)</label>
+                        <input type="number" id="estopLoss1" onChange="changeSL1()" class="form-control" value="1000">
+                    </div>
+                </div>
+            </div>
+
+            <div class="contanier" id="multipleModeOption">
+
+                <!-- Multiple Game Mode -->
+                <div class="row">
+
+                    <!-- Player -->
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="MaltipleGameModeOnPlayer"
+                                onchange="selectPlayer()" checked />
+                            <label class="form-check-label" for="flexCheckDefault" id="tieLable"> &nbsp; Player</label>
+                        </div>
+                    </div>
+
+                    <!-- Banker -->
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="MaltipleGameModeOnBanker"
+                                onchange="selectBanker()" checked />
+                            <label class="form-check-label" for="flexCheckDefault" id="tieLable"> &nbsp; Banker</label>
+                        </div>
+                    </div>
+
+                    <!-- Differential  -->
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="MaltipleGameModeOnDifferential"
+                                onchange="selectDifferential()" checked />
+                            <label class="form-check-label" for="flexCheckDefault" id="tieLable"> &nbsp;
+                                Differential</label>
+                        </div>
+                    </div>
+
+                    <!-- Target -->
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="MaltipleGameModeOnTarget"
+                                onchange="selectTarget()" checked />
+                            <label class="form-check-label" for="flexCheckDefault" id="tieLable"> &nbsp; Target</label>
+                        </div>
+                    </div>
+
+                    <!-- SOW -->
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="MaltipleGameModeOnSOW"
+                                onchange="selectSOW()" checked />
+                            <label class="form-check-label" for="flexCheckDefault" id="tieLable"> &nbsp; SOW</label>
+                        </div>
+                    </div>
+
+
+                    <!-- Zig Zag Player -->
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="MaltipleGameModeOnZigZagPlayer"
+                                onchange="selectZigZagPlayer()" checked />
+                            <label class="form-check-label" for="flexCheckDefault" id="tieLable"> &nbsp;ZigZag Player
+                                First</label>
+                        </div>
+                    </div>
+
+                    <!-- Zig Zag Banker -->
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="MaltipleGameModeOnZigZagBanker"
+                                onchange="selectZigZagBanker()" checked/>
+                            <label class="form-check-label" for="flexCheckDefault" id="tieLable"> &nbsp;ZigZag Banker
+                                First</label>
+                        </div>
+                    </div>
+
+                    <!-- MVD -->
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="MaltipleGameModeOnMVD"
+                                onchange="selectMVD()" checked />
+                            <label class="form-check-label" for="flexCheckDefault" id="tieLable">MVD</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-2">
+
+                    <!-- All Modes -->
+                    <div class="col-2 mt-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="MaltipleGameModeOnAll"
+                                onchange="selectAllMode()" checked />
+                            <label class="form-check-label" for="flexCheckDefault" id="tieLable"> &nbsp; All</label>
+                        </div>
+                    </div>
+
+                    <!-- Display Which Play Mode -->
+                    <div class="col-4">
+                        <label for="formGroupExampleInput" class="form-label">Play Method</label>
+                        <select class="form-select" id="PlayMethodInMultiMode" aria-label="Disabled select example"
+                            onchange="ChangePlayMethodInMultiMode(this)">
+                            <option value="0" >Normal</option>
+                            <option value="1" selected>Differential</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="displayNoOptionSelected" class="text-danger text-center">
+                <h4> Plz,Select Any Option </h4>
+            </div>
+
+            <div class="row">
+                <!-- Start Exexuting -->
+                <div class="col-3">
+                    <button type="button" class="btn btn-dark" id="startExecutingId" onclick="startRandomShoe()">Start
+                        Executing</button>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- Hidden Btn -->
+        <div class="container" id="bottonOfWinners">
+            <div class="row">
+                <div class="col">
+                    <button type="button" class="btn btn-primary" onclick="actualWin(this.id)" id="actualWinPlayer"
+                        value="Player" style="margin-right: 10px ;">Player</button>
+                    <button type="button" class="btn btn-danger" onclick="actualWin(this.id)" id="actualWinBanker"
+                        style="margin-right: 10px ;" value="Banker">Banker</button>
+                    <button type="button" class="btn btn-success" onclick="actualWin(this.id)" id="tieWinner"
+                        style="margin-right: 10px ;" value="Tie">Tie</button>
+                    <button type="button" class="btn btn-warning" onclick="actualWin(this.id)" id="undoWinner"
+                        value="undoWinner">Undo</button>
+                </div>
+            </div>
+            <p id="bet"></p>
+            <p id="preview"></p>
+        </div>
+
+        <div id="variableTable"></div>
+
+        <!-- Display Table -->
+        <div id="Borad-list" class="boradinsimulation"></div>
+
+
+
+        <div class="text-center" id="lodingSpinner">
+            <div class="spinner-border" role="status"></div>
+        </div>
+
+    </div>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.5/xlsx.full.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.5/jszip.js"></script>
+
+    <!-- Only Variable -->
+    <script src="allVariable.js"></script>
+
+    <!-- Mutiple Game Mode -->
+    <script src="./multipleGameModeManagement.js"></script>
+
+    <!-- Main Game Management -->
+    <script src="mainGame.js"></script>
+
+    <!-- Xlsx File Upload -->
+    <script src="form-uploading-xlsx-file.js"></script>
+
+    <!-- Player , Banker , Diff , Target  :- Management -->
+    <script src="PlayerBankerDiffTargetManagement.js"></script>
+
+    <!-- Clear Table -->
+    <script src="additionallyFunction.js"></script>
+
+    <!-- Simulation Management -->
+    <script src="information-about-game-parameter.js"></script>
+
+    <script src="randomShoe.js"></script>
+
+</body>
+
+</html>

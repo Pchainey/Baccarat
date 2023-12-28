@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Baccarat Dream</title>
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+      <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'"> -->
+    <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.min.css" />
+    <!-- <link rel="stylesheet" href="../gamepage.css" /> -->
+    <link rel="stylesheet" href="./ASSNormal.css" />
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-dark bg-dark fixed-top" style="height: 60px ;">
+        <a class="navbar-brand" href="#" style="font-size: 20px ;"> &emsp; Baccarat Dream</a>
+    </nav>
+
+    <!-- <div class="assnoramal">  -->
+    <div class="container sidebar">
+        <!-- <div id="insidebar"> -->
+        <!-- Row1 : Stop Game -->
+        <div class="row" id="GameResultDisplayId"></div>
+
+        <!-- Row2 -->
+        <div class="row mt-2">
+
+            <!-- Clear Table -->
+            <div class="col">
+                <button type="button" class="btn btn-dark  first-row-btn" onclick="clearTable()">Clear
+                    Table</button>
+            </div>
+
+            <!-- Display Variable Table -->
+            <div class="col" id="showVaribleTableBtn">
+                <button type="button" class="btn btn-dark  first-row-btn" onclick="displayvariableTable()">Show
+                    Variable Table</button>
+            </div>
+
+            <!-- Enter Stop Loss -->
+            <div class="col">
+                <div class="mb">
+                    <label for="formGroupExampleInput" class="form-label">Stop Loss (Unit)</label>
+                    <input type="number" id="StopLossID" onChange="changeStopLoss()" class="form-control" value="1000">
+                </div>
+            </div>
+
+            <!-- Stop Game Btn -->
+            <div class="col">
+                <button type="button" class="btn btn-dark  first-row-btn" onclick="stopGame()" id="quit">Quit
+                    Game</button>
+            </div>
+        </div>
+
+        <!-- Row 3 -->
+        <div class="row mt-3">
+
+            <!-- Enter Stop Profit -->
+            <div class="col">
+                <div class="mb">
+                    <label for="formGroupExampleInput" class="form-label">Take Profit (Unit)</label>
+                    <input type="number" id="StopProfitID" onChange="changeStopProfit()" class="form-control"
+                        value="1000">
+                </div>
+            </div>
+
+            <!-- Enter Max Bet  -->
+            <div class="col">
+                <div class="mb-3">
+                    <label for="formGroupExampleInput" class="form-label">Max Bet (Unit)</label>
+                    <input type="number" class="form-control" id="MaxBetID" onchange="changeMaxBet()" value="1000">
+                </div>
+            </div>
+
+            <!-- Enter Max Hand   -->
+            <div class="col-3">
+                <div class="mb-3">
+                    <label for="formGroupExampleInput" class="form-label">Max Hand</label>
+                    <input type="number" class="form-control" id="MaxHandId" onchange="changeMaxHand()" value="100">
+                </div>
+            </div>
+
+
+        </div>
+
+        <!-- Row4 -->
+        <div class="row mt-3">
+
+            <!-- Enter Unit Size -->
+            <div class="col-3">
+                <div class="mb-3">
+                    <label for="formGroupExampleInput" class="form-label">Unit Size</label>
+                    <input type="number" class="form-control" id="PerUnitId" placeholder="Enter Unit Size"
+                        onchange="changePerUnit()" value="1">
+                </div>
+            </div>
+
+            <!-- Enter No Of Brake -->
+            <div class="col-3">
+                <div class="mb-3">
+                    <label for="formGroupExampleInput" class="form-label">Brake</label>
+                    <input type="number" class="form-control" id="BrakeId" placeholder="Enter No Of Brake"
+                        onchange="changeBrake()" value="0">
+                </div>
+            </div>
+
+            <!-- Tie Mode -->
+            <div class="col">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="TieModeId" onchange="chnageTieMode()" />
+                    <label class="form-check-label" for="flexCheckDefault" id="tieLable"> &nbsp; Tie Mode</label>
+                </div>
+            </div>
+
+
+            <!-- Where To Bet -->
+            <div class="col">
+                <div class="form-group d-flex flex-column justify-content">
+                    <p id="Bet"></p>
+                </div>
+            </div>
+
+
+        </div>
+
+        <!-- Row5 -->
+        <div class="row mt-3">
+            <!-- Select Where to Bet Type -->
+            <div class="col">
+                <label for="formGroupExampleInput" class="form-label">Game Mode</label>
+                <select class="form-select" id="GameModeId" aria-label="Disabled select example"
+                    onchange="GameModeChange(this)">
+                    <option value="0" selected>Banker</option>
+                    <option value="1">Player</option>
+                    <option value="2">ZigZag Player First</option>
+                    <option value="3">ZigZag Banker First</option>
+                    <option value="4">Multiple Mode</option>
+                    <option value="5">SOW</option>
+                    <option value="6">MVD</option>
+                </select>
+            </div>
+
+            <!-- Progression Drop Down -->
+            <div class="col-4">
+                <label for="formGroupExampleInput" class="form-label">Progression</label>
+                <select class="form-select" id="ProgressionDropDownId" aria-label="Disabled select example"
+                    onchange="changeInProgression(this)">
+                    <option value="0" selected>Negative</option>
+                    <option value="1">Positive</option>
+                </select>
+            </div>
+
+            <!-- What To next Bet Come -->
+            <div class="col">
+                <input class="form-check-input displayPreviewBet" type="checkbox" id="displayPreviewBetId"
+                    onchange="chnageDisplayPreviewBet()" checked />
+                <label for="formGroupExampleInput" class="form-label">Dispaly Preview</label>
+                <p id="Preview" class="d-flex flex-column justify-content"></p>
+            </div>
+
+        </div>
+
+        <div class="contanier" id="multipleModeOption">
+
+            <!-- Multiple Game Mode -->
+            <div class="row">
+
+                <!-- Player -->
+                <div class="col">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="MaltipleGameModeOnPlayer"
+                            onchange="selectPlayer()" checked />
+                        <label class="form-check-label multiModeLable " for="flexCheckDefault" id="playerMMLable">
+                            Player</label>
+                    </div>
+                </div>
+
+                <!-- Zig Zag Player -->
+                <div class="col">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="MaltipleGameModeOnZigZagPlayer"
+                            onchange="selectZigZagPlayer()" checked />
+                        <label class="form-check-label multiModeLable" for="flexCheckDefault"
+                            id="ZigZagPlayerFirstMMLable"> ZigZag Player First</label>
+                    </div>
+                </div>
+
+                <!-- SOW -->
+                <div class="col">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="MaltipleGameModeOnSOW"
+                            onchange="selectSOW()" checked />
+                        <label class="form-check-label multiModeLable" for="flexCheckDefault" id="SOWMMLable">
+                            SOW</label>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="row">
+                <!-- Banker -->
+                <div class="col">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="MaltipleGameModeOnBanker"
+                            onchange="selectBanker()" checked />
+                        <label class="form-check-label multiModeLable" for="flexCheckDefault" id="bankerMMLable">
+                            Banker</label>
+                    </div>
+                </div>
+
+                <!-- Zig Zag Banker -->
+                <div class="col">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="MaltipleGameModeOnZigZagBanker"
+                            onchange="selectZigZagBanker()" checked />
+                        <label class="form-check-label multiModeLable" for="flexCheckDefault"
+                            id="ZigZagBankerFirstMMLable">ZigZag Banker First</label>
+                    </div>
+                </div>
+
+                <!-- MVD -->
+                <div class="col">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="MaltipleGameModeOnMVD"
+                            onchange="selectMVD()" checked />
+                        <label class="form-check-label multiModeLable" for="flexCheckDefault"
+                            id="MVDMMLable">MVD</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+
+                <!-- All Modes -->
+                <div class="col-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="MaltipleGameModeOnAll"
+                            onchange="selectAllMode()" checked />
+                        <label class="form-check-label multiModeLable" for="flexCheckDefault" id="AllMMLable">
+                            All</label>
+                    </div>
+                </div>
+
+                <!-- Display Which Play Mode -->
+                <div class="col-4">
+                    <label for="formGroupExampleInput" class="form-label">Play Method</label>
+                    <select class="form-select" id="PlayMethodInMultiMode" aria-label="Disabled select example"
+                        onchange="ChangePlayMethodInMultiMode(this)">
+                        <option value="0">Normal</option>
+                        <option value="1" selected>Differential</option>
+                    </select>
+                </div>
+
+                <div class="col">
+                    <button type="button" class="btn btn-dark mt-4" onclick="showIndividualUnitBtn()" value="quit"
+                        id="showIndividualUnit">Show individual unit</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="displayNoOptionSelected" class="text-danger text-center">
+            <h4> Select Any Option </h4>
+        </div>
+
+
+        <!-- Row 6 -->
+        <div class="row mt-2">
+
+            <!-- Display Which Mode -->
+            <div class="col-4">
+                <label for="formGroupExampleInput" class="form-label">Input Taken From</label>
+                <select class="form-select" id="AmountSelectionSystemInputTakenFrom"
+                    aria-label="Disabled select example" onchange="chageAmountSelectionSystemInputTakenFrom(this)">
+                    <option value="0" selected>DropDown</option>
+                    <option value="1">Input Filed</option>
+                </select>
+            </div>
+
+            <!-- Amount Selection Systeam -->
+            <div class="col-4">
+                <label for="formGroupExampleInput" class="form-label">Amount Selection System</label>
+                <select class="form-select" id="AmountSelectionSystemId" aria-label="Disabled select example"
+                    onchange="changeAmountSelectionSystem(this)">
+                    <option value="0" selected>8,15,35,60,20,20</option>
+                    <option value="1">2,3,6,3,2,2,2</option>
+                    <option value="2">1,2,4,8,10,10</option>
+                    <option value="3">2,3,6,3,2,2</option>
+                </select>
+            </div>
+
+            <!-- Enter New Selection  -->
+            <div class="col-4">
+                <div class="mb-3">
+                    <label for="formGroupExampleInput" class="form-label" id="newAmountSelectionLable">New Amount
+                        Selection </label>
+                    <input type="text" class="form-control" id="newAmountSelectionID"
+                        onchange="createNewAmountSelection()">
+                </div>
+            </div>
+
+
+        </div>
+
+        <!-- which win player or banker -->
+        <div class=" row mt-4" id="bottonOfWinners">
+            <div class="row">
+                <div class="col">
+                    <button type="button" class="btn btn-primary" onclick="actualWin(this.id)" id="actualWinPlayer"
+                        value="Player" style="margin-right: 10px ;">Player</button>
+                    <button type="button" class="btn btn-danger" onclick="actualWin(this.id)" id="actualWinBanker"
+                        style="margin-right: 10px ;" value="Banker">Banker</button>
+                    <button type="button" class="btn btn-success" onclick="actualWin(this.id)" id="tieWinner"
+                        style="margin-right: 10px ;" value="Tie">Tie</button>
+                    <button type="button" class="btn btn-warning" onclick="actualWin(this.id)" id="undoWinner"
+                        style="margin-right: 10px ;" value="undoWinner">Undo</button>
+                    <button type="button" class="btn btn-dark" onclick="showchangePreferences()" value="quit"
+                        id="showIndividualUnit">Change preferences</button>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- </div> -->
+
+
+
+    </div>
+
+    <div class="container main">
+        <div class="row" id="NoofBP"></div>
+        <div id="Baccarat-Borad"></div>
+        <div id="variableTable"></div>
+        <div id="Borad-list"></div>
+
+
+
+    </div>
+
+    <!-- The overlay -->
+    <div id="myNav" class="overlay">
+
+        <!-- Button to close the overlay navigation -->
+        <!-- <a href="javascript:void(0)" class="closebtn" id="closebtn" onclick="stopGame()">&times;</a> -->
+
+        <!-- Overlay content -->
+        <div class="overlay-content" id="oc"></div>
+
+    </div>
+
+
+    <!-- The overlay screen 2 -->
+    <div id="changePreferencesId" class="overlay" style="display: none;">
+
+        <!-- Overlay content -->
+        <div class="overlay-content" id="CP-Content">
+            <div class="container sidebar2">
+
+                <!-- row 1 -->
+                <div class="row mt-4">
+
+                    <div class="col-4">
+                        <!-- Enter No Of Brake -->
+                        <div class="mb-3">
+                            <label for="formGroupExampleInput" class="form-label">Brake</label>
+                            <input type="number" class="form-control" id="brakeIdINCP" placeholder="Enter No Of Brake"
+                                onchange="changeBrakeINCP()" value="0">
+                        </div>
+                    </div>
+
+                    <!-- Tie Mode -->
+                    <div class="col-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="TieModeIdINCP"
+                                onchange="chnageTieMode()" />
+                            <!-- Add function -->
+                            <label class="form-check-label" for="flexCheckDefault" id="tieLable"> &nbsp; Tie
+                                Mode</label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Row 2 -->
+                <!-- Select Game Mode -->
+                <div class="row">
+                    <div class="col-6">
+                        <label for="formGroupExampleInput" class="form-label">Game Mode</label>
+                        <select class="form-select" id="bettypeINCP" aria-label="Disabled select example"
+                            onchange="GameModeChange(this)">
+                            <!-- Add Function -->
+                            <option value="0">Banker</option>
+                            <option value="1">Player</option>
+                            <option value="2">SOW</option>
+                            <option value="3">Multiple Mode</option>
+                            <option value="4">ZigZag Player First</option>
+                            <option value="5">ZigZag Banker First</option>
+                            <option value="6">MVD</option>
+                        </select>
+                    </div>
+
+                    <!-- Progression Drop Down -->
+                    <div class="col-4">
+                        <label for="formGroupExampleInput" class="form-label">Progression</label>
+                        <select class="form-select" id="ProgressionDropDownIdINCP" aria-label="Disabled select example"
+                            onchange="changeInProgression(this)">
+                            <option value="0">Negative</option>
+                            <option value="1">Positive</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <!-- Row 3 -->
+                <!-- display in MM -->
+                <div class="contanier" id="multipleModeOptionINCP">
+
+                    <!-- Multiple Game Mode -->
+                    <div class="row">
+
+                        <!-- Player -->
+                        <div class="col">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value=""
+                                    id="MaltipleGameModeOnPlayerINCP" onchange="selectPlayer()" />
+                                <label class="form-check-label multiModeLable " for="flexCheckDefault"
+                                    id="playerMMLableINCP">
+                                    Player</label>
+                                <!-- &nbsp;  -->
+                            </div>
+                        </div>
+
+                        <!-- SOW -->
+                        <div class="col">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="MaltipleGameModeOnSOWINCP"
+                                    onchange="selectSOW()" />
+                                <label class="form-check-label multiModeLable" for="flexCheckDefault"
+                                    id="SOWMMLableINCP"> SOW</label>
+                            </div>
+                        </div>
+
+                        <!-- Zig Zag Player -->
+                        <div class="col-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value=""
+                                    id="MaltipleGameModeOnZigZagPlayerINCP" onchange="selectZigZagPlayer()" />
+                                <label class="form-check-label multiModeLable" for="flexCheckDefault"
+                                    id="ZigZagPlayerFirstMMLableINCP">
+                                    ZigZag
+                                    Player First</label>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row">
+
+                        <!-- Banker -->
+                        <div class="col">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value=""
+                                    id="MaltipleGameModeOnBankerINCP" onchange="selectBanker()" />
+                                <label class="form-check-label multiModeLable" for="flexCheckDefault"
+                                    id="bankerMMLableINCP">
+                                    Banker</label>
+                            </div>
+                        </div>
+
+                        <!-- MVD -->
+                        <div class="col">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="MaltipleGameModeOnMVDINCP"
+                                    onchange="selectMVD()" />
+                                <label class="form-check-label multiModeLable" for="flexCheckDefault"
+                                    id="MVDMMLableINCP">MVD</label>
+                            </div>
+                        </div>
+
+                        <!-- Zig Zag Banker -->
+                        <div class="col-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value=""
+                                    id="MaltipleGameModeOnZigZagBankerINCP" onchange="selectZigZagBanker()" />
+                                <label class="form-check-label multiModeLable" for="flexCheckDefault"
+                                    id="ZigZagBankerFirstMMLableINCP">ZigZag
+                                    Banker First</label>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="row mt-2">
+
+                        <!-- All Modes -->
+                        <div class="col-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="MaltipleGameModeOnAllINCP"
+                                    onchange="selectAllMode()" />
+                                <label class="form-check-label multiModeLable" for="flexCheckDefault"
+                                    id="AllMMLableINCP"> All</label>
+                            </div>
+                        </div>
+
+                        <!-- Display Which Play Mode -->
+                        <div class="col-4">
+                            <label for="formGroupExampleInput" class="form-label">Play Method</label>
+                            <select class="form-select" id="PlayMethodInMultiModeINCP"
+                                aria-label="Disabled select example" onchange="ChangePlayMethodInMultiMode(this)">
+                                <option value="0">Normal</option>
+                                <option value="1">Differential</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- row4 -->
+                <div class="row mt-3">
+                    <div class="col">
+                        <button type="button" class="btn btn-danger" onclick="ClosechangePreferences()">Close Change
+                            preferences</button>
+                    </div>
+                </div>
+            </div>
+            <div class="container main2">
+                <div class="try">
+                    <div id="variableTableINCP"></div>
+                    <div id="Borad-listINCP"></div>
+                    <div class="extra"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- The overlay screen 3 -->
+    <div id="showIndividualUnitScreenID" class="overlay">
+        <!-- Overlay content -->
+        <div class="overlay-content" id="ShowIndividualUnit-Content"></div>
+    </div>
+
+
+    <!-- Variable List -->
+    <script src="VariableForASS.js"></script>
+
+    <!-- Mutiple Game Mode -->
+    <script src="./multipleGameModeManagement.js"></script>
+
+    <!-- Main Game Management   -->
+    <script src="ASSNormal.js"></script>
+
+    <!-- Game Mode Management -->
+    <script src="GameModeManagement.js"></script>
+
+    <!-- Additionally Fuction -->
+    <script src="AdditionallyFunctionInASS.js"></script>
+
+
+</body>
+
+</html>

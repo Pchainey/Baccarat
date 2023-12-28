@@ -1,0 +1,105 @@
+body{
+    overflow: auto;
+}
+
+.container{
+    /* margin-top: 65px; */
+    padding-top: 65px;
+    background-color: white;
+}
+
+#removeDIV{
+    display: block;
+}
+
+.form{
+    display: none;
+}
+
+#form-title{
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+.form-check-input{
+    width: 1.2em !important;
+    height: 1.2em !important;
+    margin-top: 1em !important ;
+}
+
+#tieLable , #play3css , #play2css , #noramlplaycss{
+    margin-top: 1em ;
+    font-size: 12px ;
+}
+
+#startExecutingId{
+    margin-top: 2.5em;
+}
+
+#bottonOfWinners{
+    display: none;
+}
+
+#lossbackground{
+    background-color: rgb(215, 105, 105);
+}
+
+#lodingSpinner{
+    display: none;
+}
+
+#showParameter{
+    display: none;
+}
+
+#result{
+    background-color: white;
+}
+
+#simulation-table{
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+#Simulation-Shoe{
+    width: 200%;
+    padding-right: 25px;
+    margin-left: 25px;
+    /* margin-top: 42px ; */
+    /* display: none; */
+    display: flex;
+    overflow: auto;
+    flex-direction: column;
+    margin-top: 10px;
+    /* margin-right: -1000px; */
+}
+
+#headerOfTable{
+    /* position: sticky;
+    top: 104px; */
+    color: rgb(230, 237, 243);
+    background-color: rgb(0, 0, 0);
+    margin-bottom: 50px;
+}
+
+#back-home{
+    display: none;
+    /* position: fixed;
+    top: 65px; */
+    background-color: white;
+    padding-left : 50px;
+    width: 100%;
+}
+
+.container.boradinsimulation th{
+    display: flex;
+}
+
+#error-title{
+    text-align:  center;
+    color: rgb(235, 28, 28);
+}
+
+/* .sidebar{
+    display: none;
+} */

@@ -1,0 +1,14 @@
+/node_modules
+/out
+/baccarat-dream*
+/dist
+/tmp
+/build
+
+npm-debug.log
+/coverage/*
+/e2e/*.js
+/e2e/*.map
+/Book1.xlsx
+/Bacarrat_Sample_Shoes.xlsx 
+/tie_shoes_1(small).xlsx

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Baccarat Dream</title>
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+      <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'"> -->
+    <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./ASSNormal.css" />
+    <link rel="stylesheet" href="./ASSSimulation.css" />
+    <link rel="stylesheet" href="./ASSRandomShoe.css" />
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-dark bg-dark fixed-top" style="height: 60px ;">
+        <a class="navbar-brand" href="#" style="font-size: 20px ;"> &emsp; Baccarat Dream</a>
+    </nav>
+
+    <div class="randomShoeDiv">
+
+        <!-- Back To Home Btn -->
+        <div id="mainBackToHome">
+            <a class="btn btn-success" id="start-simulation" href="../../index.html" role="button">Back To Home</a>
+        </div>
+
+        <br>
+
+        <!-- Display Random Shoe No And play Agin Btn -->
+        <div id="DisplayShoeNumber">
+            <div class="row">
+                <div class="col-3">
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput" class="form-label">Random Shoe No</label>
+                        <input type="number" class="form-control" id="RSNo" value="0" onchange="validityCheck4RSNO()">
+                    </div>
+                </div>
+                <div class="col-3">
+                    <button type="button" class="btn btn-dark" onclick="playAgainInRS()" id="playAgainBtn"
+                        style="margin-right: 10px ; margin-top: 25px;">Play Again</button>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="back-home" class="row">
+            <div class="col">
+                <button type="button" class="btn btn-primary" onclick="nextSimulationRS()" id="backToSimulation"
+                    style="margin-right: 10px ;">Next Simulation</button>
+                <a class="btn btn-success" id="start-simulation" href="../../index.html" role="button"
+                    style="margin-right: 10px ;">Back To Home</a>
+                <button type="button" class="btn btn-dark" onclick="showParameterRS()" id="showParameterBtn"
+                    style="margin-right: 10px ;">Show Parameters</button>
+
+                <span id="showVaribleTableBtn">
+                    <button type="button" class="btn btn-dark" onclick="displayvariableTable()">Show Variable
+                        Table</button>
+                </span>
+            </div>
+        </div>
+
+        <!-- Select Mode Of Random Shoe -->
+        <div id="selectPlayModeOfRandomShoe">
+            <h5>Select Play Mode</h5>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="randomPlayId"
+                    onchange="randomPlayFun()" />
+                <label class="form-check-label" for="inlineRadio1">Random Play</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="selectXlsxFileId"
+                    onchange="selcetXlsxFileFun()" />
+                <label class="form-check-label" for="inlineRadio2">Select Xlsx File</label>
+            </div>
+        </div>
+
+        <!-- File Upload and Start Game Btn -->
+        <div id="displayBtnForRandomShoe"></div>
+
+        <!-- Form For Random Shoe -->
+        <div id="formDisplayInRS" class="form">
+            <h3 id="form-title">Enter Values For Simulation</h3>
+
+            <!-- Row 1 -->
+            <div class="row mt-2">
+
+                <!-- Tie Mode -->
+                <div class="col-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="TieModeId" onchange="chnageTieMode()" />
+                        <label class="form-check-label" for="flexCheckDefault" id="tieLable"> &nbsp; Tie Mode</label>
+                    </div>
+                </div>
+
+                <!-- Select Where to Bet Type -->
+                <div class="col-3">
+                    <label for="formGroupExampleInput" class="form-label">Game Mode</label>
+                    <select class="form-select" id="GameModeId" aria-label="Disabled select example"
+                        onchange="GameModeChange(this)">
+                        <option value="0" selected>Banker</option>
+                        <option value="1">Player</option>
+                        <option value="2">ZigZag Player First</option>
+                        <option value="3">ZigZag Banker First</option>
+                        <option value="4">Multiple Mode</option>
+                        <option value="5">SOW</option>
+                        <option value="5">MVD</option>
+
+                    </select>
+                </div>
+
+                <!-- Progression Drop Down -->
+                <div class="col-3">
+                    <label for="formGroupExampleInput" class="form-label">Progression</label>
+                    <select class="form-select" id="ProgressionDropDownId" aria-label="Disabled select example"
+                        onchange="changeInProgression(this)">
+                        <option value="0" selected>Negative</option>
+                        <option value="1">Positive</option>
+                    </select>
+                </div>
+
+                <!-- Enter Unit Size -->
+                <div class="col-2">
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput" class="form-label">Unit Size</label>
+                        <input type="number" class="form-control" id="PerUnitId" placeholder="Enter Unit Size"
+                            onchange="changePerUnit()" value="1">
+                    </div>
+                </div>
+
+                <!-- Enter Stop Loss -->
+                <div class="col-2">
+                    <div class="mb">
+                        <label for="formGroupExampleInput" class="form-label">Stop Loss (Unit)</label>
+                        <input type="number" id="StopLossID" onChange="changeStopLoss()" class="form-control"
+                            value="1000">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="contanier" id="multipleModeOption">
+
+                <!-- Multiple Game Mode -->
+                <div class="row">
+
+                    <!-- Player -->
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="MaltipleGameModeOnPlayer"
+                                onchange="selectPlayer()" checked />
+                            <label class="form-check-label" for="flexCheckDefault" id="tieLable"> &nbsp; Player</label>
+                        </div>
+                    </div>
+
+                    <!-- Banker -->
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="MaltipleGameModeOnBanker"
+                                onchange="selectBanker()" checked />
+                            <label class="form-check-label" for="flexCheckDefault" id="tieLable"> &nbsp; Banker</label>
+                        </div>
+                    </div>
+
+                    <!-- Zig Zag Player -->
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="MaltipleGameModeOnZigZagPlayer"
+                                onchange="selectZigZagPlayer()" checked />
+                            <label class="form-check-label" for="flexCheckDefault" id="tieLable"> &nbsp;ZigZag Player
+                                First</label>
+                        </div>
+                    </div>
+
+                    <!-- Zig Zag Banker -->
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="MaltipleGameModeOnZigZagBanker"
+                                onchange="selectZigZagBanker()" checked />
+                            <label class="form-check-label" for="flexCheckDefault" id="tieLable"> &nbsp;ZigZag Banker
+                                First</label>
+                        </div>
+                    </div>
+
+                    <!-- SOW -->
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="MaltipleGameModeOnSOW"
+                                onchange="selectSOW()" checked />
+                            <label class="form-check-label" for="flexCheckDefault" id="tieLable"> &nbsp; SOW</label>
+                        </div>
+                    </div>
+
+                    <!-- MVD -->
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="MaltipleGameModeOnMVD"
+                                onchange="selectMVD()" checked />
+                            <label class="form-check-label" for="flexCheckDefault" id="tieLable">MVD</label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row mt-2">
+
+                    <!-- All Modes -->
+                    <div class="col-2 ">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="MaltipleGameModeOnAll"
+                                onchange="selectAllMode()" checked/>
+                            <label class="form-check-label" for="flexCheckDefault" id="tieLable"> &nbsp; All</label>
+                        </div>
+                    </div>
+
+                    <!-- Display Which Play Mode -->
+                    <div class="col-4">
+                        <label for="formGroupExampleInput" class="form-label">Play Method</label>
+                        <select class="form-select" id="PlayMethodInMultiMode" aria-label="Disabled select example"
+                            onchange="ChangePlayMethodInMultiMode(this)">
+                            <option value="0" >Normal</option>
+                            <option value="1" selected>Differential</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div id="displayNoOptionSelected" class="text-danger text-center">
+                <h4> Plz,Select Any Option </h4>
+            </div>
+
+
+            <!-- Row 2 -->
+            <div class="row mt-2">
+
+                <!-- Enter Stop Profit -->
+                <div class="col">
+                    <div class="mb">
+                        <label for="formGroupExampleInput" class="form-label">Take Profit (Unit)</label>
+                        <input type="number" id="StopProfitID" onChange="changeStopProfit()" class="form-control"
+                            value="1000">
+                    </div>
+                </div>
+
+                <!-- Enter Max Bet  -->
+                <div class="col">
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput" class="form-label">Max Bet (Unit)</label>
+                        <input type="number" class="form-control" id="MaxBetID" onchange="changeMaxBet()" value="1000">
+                    </div>
+                </div>
+
+                <!-- Enter Max Hand -->
+                <div class="col-3">
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput" class="form-label">Max Hand</label>
+                        <input type="number" class="form-control" id="MaxHandId" onchange="changeMaxHand()" value="100">
+                    </div>
+                </div>
+
+                <!-- Enter No Of Brake -->
+                <div class="col-3">
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput" class="form-label">Brake</label>
+                        <input type="number" class="form-control" id="BrakeId" placeholder="Enter No Of Brake"
+                            onchange="changeBrake()" value="0">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row mt-2">
+
+
+                <!-- Display Which Mode -->
+                <div class="col-4">
+                    <label for="formGroupExampleInput" class="form-label">Input Taken From</label>
+                    <select class="form-select" id="AmountSelectionSystemInputTakenFrom"
+                        aria-label="Disabled select example" onchange="chageAmountSelectionSystemInputTakenFrom(this)">
+                        <option value="0" selected>DropDown</option>
+                        <option value="1">Input Filed</option>
+                    </select>
+                </div>
+
+
+                <!-- Amount Selection Systeam -->
+                <div class="col-4">
+                    <label for="formGroupExampleInput" class="form-label">Amount Selection System</label>
+                    <select class="form-select" id="AmountSelectionSystemId" aria-label="Disabled select example"
+                        onchange="changeAmountSelectionSystem(this)">
+                        <option value="0" selected>8,15,35,60,20,20</option>
+                        <option value="1">2,3,6,3,2,2,2</option>
+                        <option value="2">1,2,4,8,10,10</option>
+                        <option value="3">2,3,6,3,2,2</option>
+                    </select>
+                </div>
+
+                <!-- New Amount Selection  -->
+                <div class="col-4">
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput" class="form-label">New Amount Selection </label>
+                        <input type="text" class="form-control" id="newAmountSelectionID"
+                            onchange="createNewAmountSelection()">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row mt-2">
+
+                <!-- Start Exexuting -->
+                <div class="col-3">
+                    <button type="button" class="btn btn-dark" id="startExecutingId" onclick="startRandomShoe()">Start
+                        Executing</button>
+                </div>
+
+            </div>
+
+            <!-- Row 4 -->
+            <div class="row mt-4 displayBlock">
+
+                <!-- Where To Bet -->
+                <div class="col">
+                    <div class="form-group d-flex flex-column justify-content">
+                        <p id="Bet"></p>
+                    </div>
+                </div>
+
+                <!-- What To next Bet Come -->
+                <div class="col">
+                    <label for="formGroupExampleInput" class="form-label">Preview</label>
+                    <p id="Preview" class="d-flex flex-column justify-content"></p>
+                </div>
+
+                <div class="col-3">
+                    <!-- Enter Start Number -->
+                    <div class="mb">
+                        <label for="formGroupExampleInput" class="form-label">Start Number</label>
+                        <input type="number" id="IdStartNumber" onChange="changeStartNumber()" class="form-control"
+                            value="1">
+                    </div>
+                </div>
+                <div class="col-3">
+                    <!-- Enter End Number -->
+                    <div class="mb">
+                        <label for="formGroupExampleInput" class="form-label">End Number</label>
+                        <input type="number" id="IdEndNumber" onChange="changeEndNumber()" class="form-control"
+                            value="100">
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Row 5  -->
+            <div class=" row mt-4 displayBlock" id="bottonOfWinners">
+                <div class="row">
+                    <div class="col">
+                        <button type="button" class="btn btn-primary" onclick="actualWin(this.id)" id="actualWinPlayer"
+                            value="Player" style="margin-right: 10px ;">Player</button>
+                        <button type="button" class="btn btn-danger" onclick="actualWin(this.id)" id="actualWinBanker"
+                            style="margin-right: 10px ;" value="Banker">Banker</button>
+                        <button type="button" class="btn btn-success" onclick="actualWin(this.id)" id="tieWinner"
+                            style="margin-right: 10px ;" value="Tie">Tie</button>
+                        <button type="button" class="btn btn-warning" onclick="actualWin(this.id)" id="undoWinner"
+                            value="undoWinner">Undo</button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div id="variableTable"></div>
+
+        <!-- Display Table -->
+        <div id="Borad-list" class="boradinsimulation"></div>
+
+        <div class="text-center" id="lodingSpinner">
+            <div class="spinner-border" role="status"></div>
+        </div>
+
+    </div>
+
+
+
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.5/xlsx.full.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.5/jszip.js"></script>
+
+    <!-- Variable List -->
+    <script src="VariableForASS.js"></script>
+
+
+    <!-- Mutiple Game Mode -->
+    <script src="./multipleGameModeManagement.js"></script>
+
+    <!-- Xlsx File Upload -->
+    <script src="file-uploading-xlsx-file-in-ASS.js"></script>
+
+    <!--  -->
+    <script src="ASSNormal.js"></script>
+
+    <script src="GameModeManagement.js"></script>
+
+    <script src="AdditionallyFunctionInASS.js"></script>
+
+    <!-- Simulation Management -->
+    <!-- <script src="simulationManagementASS.js"></script> -->
+
+    <script src="ASSRandomShoe.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+body {
+    overflow-x: hidden;
+}
+
+.randomShoeDiv {
+    margin-left: 5px;
+    margin-top: 65px;
+}
+
+.randomShoeDiv #selectPlayModeOfRandomShoe {
+    margin-left: 20px;
+    display: block;
+}
+
+.randomShoeDiv #displayBtnForRandomShoe {
+    margin-left: 20px;
+    margin-top: 15px;
+}
+
+#formDisplayInRS {
+    display: none;
+    margin-left: 5px;
+}
+
+#Borad-list {
+    display: none;
+    margin-top: 28px;
+}
+
+#borad-table th {
+    top: 278px;
+
+}
+
+#randomPlayId,
+#selectXlsxFileId {
+    margin-top: 0.2em !important;
+}
+
+
+#DisplayShoeNumber {
+    display: none;
+}
+
+#variableTable {
+    width: 55%;
+    /* position: -webkit-sticky;
+    position: sticky;
+    top: 65px;  */
+    background-color: white;
+}
+

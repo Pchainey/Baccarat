@@ -1,0 +1,425 @@
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-size: 12px;
+}
+
+.btn {
+  font-size: 12px !important;
+}
+
+.form-select,
+.btn,
+.form-control {
+  font-size: 12px !important;
+  line-height: 1rem !important;
+}
+
+.form-check-input {
+  width: 1.2em !important;
+  height: 1.2em !important;
+  margin-top: 2.5em !important;
+}
+
+.assnoramal {
+  margin-top: 5px;
+  margin-left: 10px;
+}
+
+#radioLable {
+  margin-top: 2.5em;
+  font-size: 12px;
+}
+
+/* Sidebar */
+.sidebar , .sidebar2 {
+  height: 100vh;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(198, 195, 195);
+  overflow-x: hidden;
+  padding-top: 1px;
+  row-gap: 15px;
+  margin-top: 60px;
+  overflow-x: hidden;
+}
+
+/* #insidebar{
+  height: 100vh;
+  overflow-y: scroll;
+  margin-bottom: 2rem;
+  overflow-x: hidden;
+} */
+.first-row-btn {
+  margin-top: 1.8em;
+  /* vertical-align: middle; */
+}
+
+/* Play Mode Noraml , 2 paly , 3 paly ------------------------------------- */
+#tieLable {
+  margin-top: 2.5em;
+  font-size: 12px;
+}
+
+
+.multiModeLable{
+  margin-top: 2.5em;
+  font-size: 12px;
+}
+
+/* The Overlay (background) */
+.overlay {
+  /* Height & width depends on how you want to reveal the overlay (see JS below) */
+  height: 50%;
+  width: 0;
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  left: 25%;
+  top: 25%;
+  margin-top: 33px;
+  background-color: rgb(0, 0, 0);
+  /* Black fallback color */
+  background-color: rgba(0, 0, 0, 0.9);
+  border-radius: 5%;
+  /* Black w/opacity */
+  overflow-x: hidden;
+  /* Disable horizontal scroll */
+  transition: 0.5s;
+  /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
+}
+
+/* Position the content inside the overlay */
+.overlay-content {
+  position: relative;
+  top: 25%;
+  /* 25% from the top */
+  width: 100%;
+  /* 100% width */
+  text-align: center;
+  /* Centered text/links */
+  /* margin-top: 30px; */
+  padding: 10px ;
+  /* 30px top margin to avoid conflict with the close button on smaller screens */
+  color: #f1f1f1;
+}
+
+/* The navigation links inside the overlay */
+.overlay a {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 36px;
+  color: #818181;
+  display: block;
+  /* Display block instead of inline */
+  transition: 0.3s;
+  /* Transition effects on hover (color) */
+}
+
+/* When you mouse over the navigation links, change their color */
+.overlay a:hover,
+.overlay a:focus {
+  color: #f1f1f1;
+}
+
+/* When the height of the screen is less than 450 pixels, change the font-size of the links and position the close button again, so they don't overlap */
+@media screen and (max-height: 450px) {
+  .overlay a {
+    font-size: 20px
+  }
+
+  .overlay .closebtn {
+    font-size: 40px;
+    top: 15px;
+    right: 35px;
+  }
+}
+
+/* Position the close button (top right corner) */
+.overlay .closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+}
+
+
+
+/* Main */
+
+.main , .main2 {
+  margin-left: 50%;
+  /* Same as the width of the sidenav */
+  padding: 0px 15px;
+  padding-top: -1px;
+  margin-top: 65px;
+  background-color: white;
+}
+
+@media screen and (max-width: 450px) {
+  .sidebar {
+    padding-top: 15px;
+    overflow: scroll;
+  }
+
+  .sidebar a {
+    font-size: 18px;
+  }
+}
+
+
+/* --------- Table Of Bets ------------------------------------------------------- */
+
+
+
+.boradTableinPlayer {
+  color: blue;
+}
+
+.boradTableinTie {
+  color: green;
+}
+
+.boradTableinBanker {
+  color: red;
+}
+
+/* ---------------------------------------------------------------- */
+
+
+/* Baccaeart Borad Above  No Display ------------------------------------------------------------------------ */
+
+#NoofBP {
+  width: 50%;
+  /* position: sticky;
+    top: 63px;   */
+  background-color: white;
+}
+
+#tableForNoDisplay {
+  width: 200px;
+  margin-left: 30px;
+}
+
+.circleForNoOfB,
+.circleForNoOfP,
+.circleForNoOfT {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  font-size: 15px;
+  color: #f1f1f1;
+  text-align: center;
+  margin-bottom: 3px;
+  vertical-align: middle;
+}
+
+.NoDisplay4Borad {
+  font-size: 18px;
+  padding-right: 10px;
+  vertical-align: middle;
+}
+
+
+
+/* ---------------------------------------------------------------------------------------- */
+
+
+/*---- Baccarat Borad ------------------------------------------------------------------------------------- */
+.d-flex {
+  display: flex;
+}
+
+.super-script {
+  vertical-align: super;
+  font-size: 5px;
+}
+
+#Baccarat-Borad {
+  /* position: -webkit-sticky; */
+  /* position: sticky;
+    top: 95px; 
+    left: 10px;  */
+  background-color: rgb(255, 255, 255);
+  border: 1px solid;
+  width: 52%;
+  /* min-height: 140px; */
+  height: 138px;
+  font-size: 18px;
+  overflow: scroll;
+  padding-bottom: 9px;
+}
+
+#baccaratBoradcss td {
+  /* -webkit-border-radius: 50%;
+    -moz-border-radius: 50%; */
+  /* border-radius: 8px; */
+  /* border-style:solid;
+    border-width:2px; */
+  color: green;
+  width: 16px;
+  height: 16px;
+  text-align: center;
+  font-size: 10px;
+}
+
+.tie-1st {
+  width: 16px;
+  height: 16px;
+  border: 1px solid transparent;
+}
+
+.circle {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-style: solid;
+  border-width: 1.5px;
+  color: green;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.slash {
+  background: linear-gradient(to top left, #fff calc(50% - 1px), green, #fff calc(50% + 1px));
+  color: green;
+}
+
+#Baccarat-Borad::-webkit-scrollbar:horizontal {
+  height: 5px;
+}
+
+#Baccarat-Borad::-webkit-scrollbar-track:horizontal {
+  background: #f1f1f1;
+}
+
+#Baccarat-Borad::-webkit-scrollbar-thumbthumb:horizontal {
+  background: #888;
+}
+
+#Baccarat-Borad::-webkit-scrollbar-thumb:horizontal:hover {
+  background: #555;
+}
+
+.circleBanker {
+  border-color: red;
+}
+
+.circlePlayer {
+  border-color: blue;
+}
+
+
+/* -------------------------------------------------------------------------------- */
+
+#borad-table {
+  width: 30%;
+  overflow-y: scroll;
+  /* margin-top: -20px; */
+}
+
+.try {
+  display: flex;
+  flex-direction: column;
+  /* row-gap: 5px; */
+  /* position: fixed; */
+  background-color: white;
+}
+
+#variableTable {
+  width: 55%;
+  /* position: -webkit-sticky; 
+    position: sticky;
+    top: 236px;  */
+  background-color: white;
+  margin-bottom: 5px;
+}
+
+#borad-table th {
+  background-color: rgb(0, 0, 0);
+  /* position: -webkit-sticky; */
+  /* position: sticky; 
+    top: 450px;   */
+  color: rgb(230, 237, 243);
+  height: 18px;
+  margin-bottom: 10px;
+  /* margin-top: 10px; */
+}
+
+/* 
+  *
+  *
+  Multiple Game Mode
+  *
+  *
+*/
+
+#multipleModeOption {
+  display: none;
+  /* display: flex; */
+}
+
+#displayNoOptionSelected {
+  display: none;
+}
+
+
+.displayPreviewBet{
+  margin-top: 0 !important;
+}
+
+
+/* change Preferences Set up */
+#changePreferencesId{
+  height: 100%;
+  left: 0;
+  top: 0;
+  border-radius: 0;
+  background-color: rgba(0, 0, 0, 0.734);
+}
+
+#CP-Content{
+  margin-top: 35px;
+  color: rgba(0, 0, 0, 0.734);
+  text-align: justify;
+}
+
+.sidebar2{
+  margin-top: 50px;
+}
+
+.main2{
+  margin-top: -233px;
+  margin-left: 50%;
+}
+
+#variableTableINCP{
+  width: 50%;
+  /* margin-top: 210px; */
+}
+
+#multipleModeOptionINCP {
+  display: none;
+}
+
+/* Screen 3 */
+
+#showIndividualUnitScreenID{
+  width: 0%;
+  height: 100%;
+  left: 0%;
+  top: 0;
+  border-radius: 0%;
+}
+
+.extra{
+  height: 600px;
+  background-color: white;
+}
